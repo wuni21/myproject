@@ -368,6 +368,25 @@
 
 /* 지역은 화면 너비에 맞춰 줄을 바꾸고 날짜는 날씨와 겹치지 않게 배치합니다. */
 .city-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 24px 28px; overflow: visible; }
+
+/* 오늘의 일정이 많아져도 카드 전체가 계속 늘어나지 않도록 목록만 스크롤합니다. */
+.schedule-card .mini-list { min-height: 0; max-height: 240px; overflow-y: auto; }
+/* 넓은 화면에서는 날씨와 일정 열을 독립적으로 배치합니다. */
+.weather-column, .plans-column { display: contents; }
+@media (min-width: 1101px) {
+  .weather-column { grid-column: span 8; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; align-content: start; }
+  .weather-column .weather-card { grid-column: 1 / -1; }
+  .weather-column .summary-card { grid-column: auto; }
+  .plans-column { grid-column: span 4; display: grid; gap: 17px; align-content: start; min-width: 0; }
+  .plans-column .schedule-card, .plans-column .resource-card { grid-column: auto; }
+}
+@media (max-width: 1100px) {
+  .weather-card { order: 0; }
+  .schedule-card { order: 1; }
+  .summary-card { order: 2; }
+  .resource-card { order: 3; }
+  .bottom-banner { order: 4; }
+}
 .city, .city:first-child { min-width: 0; padding: 0; border: 0; }
 .city-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px 12px; }
 .city-body > div:first-child { display: contents; }
