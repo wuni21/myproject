@@ -1,0 +1,11 @@
+{
+  "name": "DAYLOG — 나의 하루를 한눈에",
+  "short_name": "DAYLOG",
+  "description": "나의 하루를 위한 작은 대시보드",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f3f2",
+  "theme_color": "#292525",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }],
+  "share_target": { "action": "/share", "method": "GET", "params": { "title": "title", "text": "text", "url": "url" } }
+}

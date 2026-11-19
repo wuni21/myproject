@@ -1,4 +1,13 @@
-# Claude Code Playbook Template
+# DAYLOG — 나의 하루를 한눈에
+
+생활에 필요한 정보를 모아 보는 실습용 대시보드입니다. 서울을 기본으로 지역별 시간과 Open-Meteo 날씨를 표시하고, 일정·자동차·자녀 할 일과 자료를 관리합니다. 자동차와 자녀 일정은 **중요한 일정**으로 표시하면 메인 화면에 나타납니다.
+
+- 일정, 자료, 추가 지역 및 테마는 현재 브라우저의 로컬 저장소에만 저장됩니다. 다른 기기와 동기화되지 않으며 브라우저 데이터를 삭제하면 함께 사라집니다.
+- 날씨와 지역 검색에는 인터넷 연결이 필요합니다. 지역 검색이 잘 되지 않으면 영문 도시 이름으로 검색해 보세요.
+- 자료는 링크를 직접 붙여넣어 저장할 수 있습니다. Web Share Target을 지원하는 브라우저에서는 HTTPS로 배포한 앱을 설치한 뒤 다른 앱의 공유 메뉴에서 링크를 전달할 수 있습니다. 공유 메뉴 지원 여부는 운영체제와 브라우저에 따라 다르며, 전달 후 저장 버튼을 눌러야 합니다.
+- 계정, 서버 저장, 카카오톡 API 연동은 포함하지 않았습니다.
+
+## 기반 템플릿: Claude Code Playbook Template
 
 [![Claude Hunt](https://img.shields.io/badge/Claude_Hunt-강의-000000)](https://www.claude-hunt.com)
 [![Docs](https://img.shields.io/badge/docs-claude--hunt-2563eb)](https://docs.claude-hunt.com)

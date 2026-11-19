@@ -3,14 +3,19 @@ import { expect, test } from "vitest";
 
 import Home from "@/app/page";
 
-test("홈 화면은 시작 안내 제목과 배포 링크를 보여준다", () => {
+test("홈 화면은 메인 제목을 보여준다", () => {
   render(<Home />);
 
   expect(
-    screen.getByRole("heading", { level: 1, name: /To get started/i })
+    screen.getByRole("heading", { level: 1, name: "나의 하루를, 한눈에." })
   ).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: /Deploy Now/i })).toHaveAttribute(
-    "href",
-    expect.stringContaining("vercel.com/new")
-  );
 });
+
+test.each(["오늘의 일정", "자동차 관리", "자녀 관리", "저장한 자료"])(
+  "홈 화면은 %s 제목을 보여준다",
+  (title) => {
+    render(<Home />);
+
+    expect(screen.getByRole("heading", { name: title })).toBeInTheDocument();
+  }
+);
