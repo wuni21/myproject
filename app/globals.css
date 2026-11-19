@@ -330,3 +330,25 @@
   .nav a { font-size: 11px; }
   .footer { font-size: 10px; }
 }
+
+.edit-actions { display: flex; gap: 10px; }
+.edit-actions button { flex: 1; }
+.secondary-button { border: 1px solid var(--line); border-radius: 999px; padding: 12px; color: var(--text); background: var(--surface); font-size: 14px; font-weight: 700; }
+.secondary-button:hover { background: var(--soft); }
+.edit-error { color: var(--action); font-size: 13px; }
+.saved-item .plain-icon { flex: none; }
+
+/* 지역은 화면 너비에 맞춰 줄을 바꾸고 날짜는 날씨와 겹치지 않게 배치합니다. */
+.city-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 24px 28px; overflow: visible; }
+.city, .city:first-child { min-width: 0; padding: 0; border: 0; }
+.city-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px 12px; }
+.city-body > div:first-child { display: contents; }
+.city-time { grid-column: 1; grid-row: 1; }
+.city-date { grid-column: 1 / -1; grid-row: 2; margin-top: 0; font-size: 19px; line-height: 1.4; word-break: keep-all; }
+.city-weather { grid-column: 2; grid-row: 1; }
+.city-weather > svg { width: 40px; height: 40px; flex: none; }
+.city-weather strong { font-size: 28px; }
+
+/* 선택 표시는 시간 제목 옆에 두고 날짜·시간 입력을 같은 높이에 맞춥니다. */
+.form-row label { display: grid; grid-template-columns: max-content 1fr; align-items: center; gap: 8px 5px; }
+.form-row label input { grid-column: 1 / -1; grid-row: 2; height: 46px; }
