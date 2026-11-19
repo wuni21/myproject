@@ -3,24 +3,30 @@
 import { useState, type FormEvent } from "react";
 import { X } from "lucide-react";
 
-type Task = { id: string; kind: "schedule" | "car" | "family"; title: string; date: string; time: string; important: boolean; done: boolean };
+type Task = { id: string; kind: "schedule" | "car" | "family"; title: string; date: string; time: string; important: boolean; done: boolean; childId?: string; carId?: string };
+type Child = { id: string; name: string };
+type Car = { id: string; name: string };
 type Resource = { id: string; title: string; url: string; note: string; created: string };
 
-export function TaskEditDialog({ task, onSave, onClose }: { task: Task; onSave: (task: Task) => void; onClose: () => void }) {
+export function TaskEditDialog({ task, childList, carList, onSave, onClose }: { task: Task; childList: Child[]; carList: Car[]; onSave: (task: Task) => void; onClose: () => void }) {
   const [title, setTitle] = useState(task.title);
   const [date, setDate] = useState(task.date);
   const [time, setTime] = useState(task.time);
   const [important, setImportant] = useState(task.important);
+  const [childId, setChildId] = useState(task.childId || "");
+  const [carId, setCarId] = useState(task.carId || "");
 
   function submit(event: FormEvent) {
     event.preventDefault();
     if (!title.trim()) return;
-    onSave({ ...task, title: title.trim(), date, time, important });
+    onSave({ ...task, title: title.trim(), date, time, important, ...(task.kind === "family" ? { childId: childId || undefined } : {}), ...(task.kind === "car" ? { carId: carId || undefined } : {}) });
   }
 
   return <div className="modal-backdrop" onClick={onClose}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="edit-task-title" onClick={(event) => event.stopPropagation()}>
     <div className="modal-heading"><h2 id="edit-task-title">일정 수정</h2><button className="icon-button" type="button" onClick={onClose} aria-label="닫기"><X size={19}/></button></div>
     <form className="form" onSubmit={submit}>
+      {task.kind === "family" && <label>자녀<select value={childId} onChange={(event) => setChildId(event.target.value)}><option value="">자녀 미지정</option>{childList.map((child) => <option key={child.id} value={child.id}>{child.name}</option>)}</select></label>}
+      {task.kind === "car" && <label>자동차<select value={carId} onChange={(event) => setCarId(event.target.value)}><option value="">자동차 미지정</option>{carList.map((car) => <option key={car.id} value={car.id}>{car.name}</option>)}</select></label>}
       <label>일정 이름<input autoFocus required value={title} onChange={(event) => setTitle(event.target.value)} /></label>
       <div className="form-row"><label>날짜<input type="date" required={task.kind === "schedule"} value={date} onChange={(event) => setDate(event.target.value)} /></label><label>시간<input type="time" value={time} onChange={(event) => setTime(event.target.value)} /></label></div>
       <label className="checkbox-label"><input type="checkbox" checked={important} onChange={(event) => setImportant(event.target.checked)} /> 중요한 일정으로 표시하기</label>
